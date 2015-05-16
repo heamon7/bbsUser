@@ -67,6 +67,7 @@ class UsererSpider(scrapy.Spider):
         item = BbsuserItem()
         try:
             data = json.loads(response.body.decode('gbk'))
+            item['debugInfo'] = 1
         except:
             data = ''
             item['debugInfo'] = -1
