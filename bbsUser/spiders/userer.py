@@ -67,12 +67,11 @@ class UsererSpider(scrapy.Spider):
         item = BbsuserItem()
         try:
             data = json.loads(response.body.decode('gbk'))
-	    item['resposne'] = 1
-	except:
-	    data =''
-	    item['response'] = response.body
-
-        item['requestId'] = re.split('query/(\w*)\.json',response.url)[1]
+        except:
+            data = ''
+            item['debugInfo'] = -1
+            item['response'] = response.body
+            item['requestId'] = re.split('query/(\w*)\.json',response.url)[1]
         try:
             item['astro'] = data['astro']
             item['face_height'] = data['face_height']
@@ -97,9 +96,6 @@ class UsererSpider(scrapy.Spider):
             item['user_name'] = data['user_name']
         except:
             item['userId'] = -1
-
-
-
         return item
 
 

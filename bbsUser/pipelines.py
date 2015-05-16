@@ -76,15 +76,14 @@ class UserPipeline(object):
                 userStatus.save()
             except LeanCloudError,e:
                 print e
-        else:
-	    pass
-	if item['response'] != 1:
-	    userStatus = UserStatus()
-	    userStatus.set('response',item['response'])
-	    try:
-		userStatus.save()
-	    except:
-		pass
+
+        if item['debugInfo'] == -1:
+            userStatus = UserStatus()
+            userStatus.set('response',item['response'])
+        try:
+            userStatus.save()
+        except:
+            pass
         #return item
         DropItem()
 
