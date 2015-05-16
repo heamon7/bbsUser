@@ -47,7 +47,7 @@ class UsererSpider(scrapy.Spider):
             query.descending('createdAt')
             query.limit(queryLimit)
             query.skip(index*queryLimit)
-            query.select('questionLink')
+            query.select('userId')
             userRet = query.find()
             for user in userRet:
                 self.urls.append(self.baseUrl + user.get('userId') +".json")
@@ -55,8 +55,8 @@ class UsererSpider(scrapy.Spider):
 
 
     def start_requests(self):
-        print "start_requests ing ......"
-        self.urls = ['http://bbs.byr.cn/user/query/heamon7.json','http://bbs.byr.cn/user/query/wdj1314.json']
+       #  print "start_requests ing ......"
+       # self.urls = ['http://bbs.byr.cn/user/query/heamon7.json','http://bbs.byr.cn/user/query/wdj1314.json']
         print self.urls
         for url in self.urls:
             yield Request(url,callback = self.parseUser)
@@ -65,10 +65,70 @@ class UsererSpider(scrapy.Spider):
 
     def parseUser(self,response):
         item = BbsuserItem()
-        data = json.loads(response.body.decode('gbk'))
+	try:
+            data = json.loads(response.body.decode('gbk'))
+	except:
+	    pass
         item['requestId'] = re.split('query/(\w*)\.json',response.url)[1]
-        item['astro'] = data['astro']
-        item['face_height'] = data['face_height']
+	try:
+            item['astro'] = data['astro']
+	except:
+	    item['astro'] = ''
+	    item['face_url'] = data['face_url']
+            item['face_width'] = data['face_width']
+            item['gender'] = data['gender']
+
+            item['home_page'] = data['home_page']
+            item['userId'] = data['id']
+            item['is_hide'] = data['is_hide']
+            item['is_online'] = data['is_online']
+            item['last_login_ip'] = data['last_login_ip']
+
+            item['last_login_time'] = data['last_login_time']
+            item['level'] =data['level']
+            item['life'] = data['life']
+            item['msn'] = data['msn']
+            item['post_count'] = data['post_count']
+            item['qq'] = data['qq']
+            item['score'] = data['score']
+        item['status'] = data['status']
+        item['user_name'] = data['user_name']
+        try:
+	    item['face_height'] = data['face_height']
+	except:
+	    item['face_height'] = ''
+	try:
+	    item['face_url'] = data['face_url']
+	except:
+	    item['face_url'] =''
+	try:
+	    
+        except:
+        try:
+
+        except:
+	try:
+
+        except:
+	try:
+
+        except:
+	try:
+
+        except:
+	try:
+
+        except:
+	try:
+
+        except:
+	try:
+
+        except:
+	try:
+
+        except:
+
         item['face_url'] = data['face_url']
         item['face_width'] = data['face_width']
         item['gender'] = data['gender']

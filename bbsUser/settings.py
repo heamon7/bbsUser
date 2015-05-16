@@ -15,7 +15,7 @@ NEWSPIDER_MODULE = 'bbsUser.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'bbsUser (+http://www.yourdomain.com)'
-
+LOG_LEVEL = 'INFO'
 ITEM_PIPELINES = {
     'bbsUser.pipelines.UserPipeline': 300,
    # 'zhihut.pipelines.SecondPipline': 800,

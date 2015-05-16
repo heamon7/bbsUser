@@ -47,10 +47,6 @@ class UserPipeline(object):
                 userInfo.set('user_name',item['user_name'])
 
 
-                query.set('userId',item['userIdList'][index])
-                query.set('answerTime',item['answerTimeList'][index])
-                query.set('answerIp',item['answerIpList'][index])
-                query.set('answerContent',item['answerContentList'][index])
                 try:
                     userInfo.save()
 
@@ -59,36 +55,37 @@ class UserPipeline(object):
         except LeanCloudError,e:
             print e
 
-        UserStatus.set('astro',item['astro'])
-        UserStatus.set('face_height',item['face_height'])
-        UserStatus.set('face_url',item['face_url'])
-        UserStatus.set('face_width',item['face_width'])
-        UserStatus.set('gender',item['gender'])
-        UserStatus.set('home_page',item['home_page'])
-        UserStatus.set('userId',item['userId'])
+        userStatus.set('astro',item['astro'])
+        userStatus.set('face_height',item['face_height'])
+        userStatus.set('face_url',item['face_url'])
+        userStatus.set('face_width',item['face_width'])
+        userStatus.set('gender',item['gender'])
+        userStatus.set('home_page',item['home_page'])
+        userStatus.set('userId',item['userId'])
 
-        UserStatus.set('is_hide',item['is_hide'])
-        UserStatus.set('is_online',item['is_online'])
-        UserStatus.set('last_login_ip',item['last_login_ip'])
-        UserStatus.set('level',item['level'])
-        UserStatus.set('life',item['life'])
+        userStatus.set('is_hide',item['is_hide'])
+        userStatus.set('is_online',item['is_online'])
+        userStatus.set('last_login_ip',item['last_login_ip'])
+        userStatus.set('last_login_time',item['last_login_time'])
+        userStatus.set('level',item['level'])
+        userStatus.set('life',item['life'])
 
-        UserStatus.set('msn',item['msn'])
-        UserStatus.set('post_count',item['post_count'])
+        userStatus.set('msn',item['msn'])
+        userStatus.set('post_count',item['post_count'])
 
-        UserStatus.set('qq',item['qq'])
-        UserStatus.set('score',item['score'])
-        UserStatus.set('status',item['status'])
-        UserStatus.set('user_name',item['user_name'])
+        userStatus.set('qq',item['qq'])
+        userStatus.set('score',item['score'])
+        userStatus.set('status',item['status'])
+        userStatus.set('user_name',item['user_name'])
 
 
         try:
-            UserStatus.save()
+            userStatus.save()
         except LeanCloudError,e:
             print e
 
-        return item
-        #DropItem()
+        #return item
+        DropItem()
 
 # questionLink
 # answerPageNum

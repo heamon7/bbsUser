@@ -22,6 +22,7 @@ class BbsuserItem(scrapy.Item):
     is_hide = scrapy.Field()
     is_online = scrapy.Field()
     last_login_ip = scrapy.Field()
+    last_login_time = scrapy.Field()
     level = scrapy.Field()
     life = scrapy.Field()
     msn = scrapy.Field()
