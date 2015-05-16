@@ -22,68 +22,68 @@ class UserPipeline(object):
         userInfo = UserInfo()
         userStatus = UserStatus()
         query = Query(UserInfo)
+        if item['userId'] != -1:
+            query.equal_to('userId',item['userId'])
+            try:
+                if query.find():
+                    pass
+                else:
+                    # userInfo.set('requestId',item['requestId'])
+                    userInfo.set('astro',item['astro'])
 
-        query.equal_to('userId',item['userId'])
+                    userInfo.set('face_height',item['face_height'])
+                    userInfo.set('face_url',item['face_url'])
+                    userInfo.set('face_width',item['face_width'])
+                    userInfo.set('gender',item['gender'])
+                    userInfo.set('home_page',item['home_page'])
+                    userInfo.set('userId',item['userId'])
+                    userInfo.set('is_hide',item['is_hide'])
+                    userInfo.set('level',item['level'])
+                    userInfo.set('msn',item['msn'])
+                    userInfo.set('qq',item['qq'])
+                    userInfo.set('user_name',item['user_name'])
+                    try:
+                        userInfo.save()
+                    except LeanCloudError,e:
+                        print e
+            except LeanCloudError,e:
+                print e
+            userStatus.set('astro',item['astro'])
+            userStatus.set('face_height',item['face_height'])
+            userStatus.set('face_url',item['face_url'])
+            userStatus.set('face_width',item['face_width'])
+            userStatus.set('gender',item['gender'])
+            userStatus.set('home_page',item['home_page'])
+            userStatus.set('userId',item['userId'])
 
+            userStatus.set('is_hide',item['is_hide'])
+            userStatus.set('is_online',item['is_online'])
+            userStatus.set('last_login_ip',item['last_login_ip'])
+            userStatus.set('last_login_time',item['last_login_time'])
+            userStatus.set('level',item['level'])
+            userStatus.set('life',item['life'])
 
+            userStatus.set('msn',item['msn'])
+            userStatus.set('post_count',item['post_count'])
 
-        try:
-            if query.find():
-                pass
-            else:
-                userInfo.set('requestId',item['requestId'])
-                userInfo.set('astro',item['astro'])
-
-                userInfo.set('face_height',item['face_height'])
-                userInfo.set('face_url',item['face_url'])
-                userInfo.set('face_width',item['face_width'])
-                userInfo.set('gender',item['gender'])
-                userInfo.set('home_page',item['home_page'])
-                userInfo.set('userId',item['userId'])
-                userInfo.set('is_hide',item['is_hide'])
-                userInfo.set('level',item['level'])
-                userInfo.set('msn',item['msn'])
-                userInfo.set('qq',item['qq'])
-                userInfo.set('user_name',item['user_name'])
-
-
-                try:
-                    userInfo.save()
-
-                except LeanCloudError,e:
-                    print e
-        except LeanCloudError,e:
-            print e
-
-        userStatus.set('astro',item['astro'])
-        userStatus.set('face_height',item['face_height'])
-        userStatus.set('face_url',item['face_url'])
-        userStatus.set('face_width',item['face_width'])
-        userStatus.set('gender',item['gender'])
-        userStatus.set('home_page',item['home_page'])
-        userStatus.set('userId',item['userId'])
-
-        userStatus.set('is_hide',item['is_hide'])
-        userStatus.set('is_online',item['is_online'])
-        userStatus.set('last_login_ip',item['last_login_ip'])
-        userStatus.set('last_login_time',item['last_login_time'])
-        userStatus.set('level',item['level'])
-        userStatus.set('life',item['life'])
-
-        userStatus.set('msn',item['msn'])
-        userStatus.set('post_count',item['post_count'])
-
-        userStatus.set('qq',item['qq'])
-        userStatus.set('score',item['score'])
-        userStatus.set('status',item['status'])
-        userStatus.set('user_name',item['user_name'])
+            userStatus.set('qq',item['qq'])
+            userStatus.set('score',item['score'])
+            userStatus.set('status',item['status'])
+            userStatus.set('user_name',item['user_name'])
 
 
-        try:
-            userStatus.save()
-        except LeanCloudError,e:
-            print e
-
+            try:
+                userStatus.save()
+            except LeanCloudError,e:
+                print e
+        else:
+            User = Object.extend('User')
+            user = User()
+            query = Query(User)
+            query.equal_to('userId',item['requestId'])
+            userRet = query.find()
+            userRet.set('flag',-1)
+            user.save()
         #return item
         DropItem()
 

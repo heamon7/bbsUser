@@ -65,16 +65,15 @@ class UsererSpider(scrapy.Spider):
 
     def parseUser(self,response):
         item = BbsuserItem()
-	try:
-            data = json.loads(response.body.decode('gbk'))
-	except:
-	    pass
+
+        data = json.loads(response.body.decode('gbk'))
+
+
         item['requestId'] = re.split('query/(\w*)\.json',response.url)[1]
-	try:
+        try:
             item['astro'] = data['astro']
-	except:
-	    item['astro'] = ''
-	    item['face_url'] = data['face_url']
+            item['face_height'] = data['face_height']
+            item['face_url'] = data['face_url']
             item['face_width'] = data['face_width']
             item['gender'] = data['gender']
 
@@ -91,63 +90,12 @@ class UsererSpider(scrapy.Spider):
             item['post_count'] = data['post_count']
             item['qq'] = data['qq']
             item['score'] = data['score']
-        item['status'] = data['status']
-        item['user_name'] = data['user_name']
-        try:
-	    item['face_height'] = data['face_height']
-	except:
-	    item['face_height'] = ''
-	try:
-	    item['face_url'] = data['face_url']
-	except:
-	    item['face_url'] =''
-	try:
-	    
+            item['status'] = data['status']
+            item['user_name'] = data['user_name']
         except:
-        try:
+            item['userId'] = -1
 
-        except:
-	try:
 
-        except:
-	try:
-
-        except:
-	try:
-
-        except:
-	try:
-
-        except:
-	try:
-
-        except:
-	try:
-
-        except:
-	try:
-
-        except:
-
-        item['face_url'] = data['face_url']
-        item['face_width'] = data['face_width']
-        item['gender'] = data['gender']
-
-        item['home_page'] = data['home_page']
-        item['userId'] = data['id']
-        item['is_hide'] = data['is_hide']
-        item['is_online'] = data['is_online']
-        item['last_login_ip'] = data['last_login_ip']
-
-        item['last_login_time'] = data['last_login_time']
-        item['level'] =data['level']
-        item['life'] = data['life']
-        item['msn'] = data['msn']
-        item['post_count'] = data['post_count']
-        item['qq'] = data['qq']
-        item['score'] = data['score']
-        item['status'] = data['status']
-        item['user_name'] = data['user_name']
 
         return item
 
