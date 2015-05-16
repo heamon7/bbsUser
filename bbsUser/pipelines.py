@@ -79,6 +79,7 @@ class UserPipeline(object):
 
         if item['debugInfo'] == -1:
             userStatus = UserStatus()
+            userStatus.set('requestId',item['requestId'])
             userStatus.set('response',item['response'])
         try:
             userStatus.save()
