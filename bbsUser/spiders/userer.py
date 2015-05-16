@@ -57,7 +57,7 @@ class UsererSpider(scrapy.Spider):
     def start_requests(self):
        #  print "start_requests ing ......"
        # self.urls = ['http://bbs.byr.cn/user/query/heamon7.json','http://bbs.byr.cn/user/query/wdj1314.json']
-        print self.urls
+       # print self.urls
         for url in self.urls:
             yield Request(url,callback = self.parseUser)
 
@@ -65,9 +65,12 @@ class UsererSpider(scrapy.Spider):
 
     def parseUser(self,response):
         item = BbsuserItem()
-
-        data = json.loads(response.body.decode('gbk'))
-
+        try:
+            data = json.loads(response.body.decode('gbk'))
+	    item['resposne'] = 1
+	except:
+	    data =''
+	    item['response'] = response.body
 
         item['requestId'] = re.split('query/(\w*)\.json',response.url)[1]
         try:

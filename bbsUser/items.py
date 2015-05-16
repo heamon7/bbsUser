@@ -11,6 +11,7 @@ import scrapy
 class BbsuserItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    response = scrapy.Field()
     requestId = scrapy.Field()
     astro = scrapy.Field()
     face_height = scrapy.Field()

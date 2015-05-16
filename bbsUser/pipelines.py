@@ -77,13 +77,14 @@ class UserPipeline(object):
             except LeanCloudError,e:
                 print e
         else:
-            User = Object.extend('User')
-            user = User()
-            query = Query(User)
-            query.equal_to('userId',item['requestId'])
-            userRet = query.find()
-            userRet.set('flag',-1)
-            user.save()
+	    pass
+	if item['response'] != 1:
+	    userStatus = UserStatus()
+	    userStatus.set('response',item['response'])
+	    try:
+		userStatus.save()
+	    except:
+		pass
         #return item
         DropItem()
 
